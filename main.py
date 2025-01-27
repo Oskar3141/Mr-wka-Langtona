@@ -13,8 +13,7 @@ class Gra:
 		self.czasBezAktualizacji: float = 0.1;
 		self.planszaS: int = s;
 		self.planszaW: int = w;
-		self.mrowkaI: int = self.planszaS * self.planszaW // 2;
-		self.mrowkaI += 0 if self.planszaS * self.planszaW % 2 == 1 else self.planszaW // 2;
+		self.mrowkaI: int = self.planszaS // 2 + self.planszaW // 2 * self.planszaS;
 		self.mrowkaKier: int = 0;
 		
 		self.plansza: [Pole] = [Pole(False, False) for _ in range(0, self.planszaS * self.planszaW)];
@@ -27,12 +26,12 @@ class Gra:
 			if self.plansza[i].mrowka:
 				znak = "@"
 			elif self.plansza[i].zywe:
-				znak = "O"
+				znak = "■"
 			else:
-				znak = "."
+				znak = " "
 
-			print(znak, " ", end="");
-			if i != 0 and (i+1) % self.planszaW == 0:
+			print(znak, "", end="");
+			if i != 0 and (i+1) % self.planszaS == 0:
 				print("");
 		print("Kroki: ", self.kroki);
 
@@ -48,13 +47,25 @@ class Gra:
 		self.plansza[self.mrowkaI].zywe = not self.plansza[self.mrowkaI].zywe;
 
 		if self.mrowkaKier == 0:
-			self.mrowkaI -= self.planszaS;
+			if self.mrowkaI - self.planszaS < 0:
+				self.mrowkaI = self.planszaS * self.planszaW - (self.planszaS - self.mrowkaI);
+			else:
+				self.mrowkaI -= self.planszaS;
 		elif self.mrowkaKier == 1:
-			self.mrowkaI += 1;			
+			if (self.mrowkaI + 1) % self.planszaS == 0:
+				self.mrowkaI -= self.planszaS - 1;
+			else:
+				self.mrowkaI += 1;			
 		elif self.mrowkaKier == 2:
-			self.mrowkaI += self.planszaS;
+			if self.mrowkaI + self.planszaS > self.planszaW * self.planszaS - 1:
+				self.mrowkaI -= (self.planszaW - 1) * self.planszaS;
+			else:
+				self.mrowkaI += self.planszaS;
 		else:
-			self.mrowkaI -= 1;
+			if self.mrowkaI % self.planszaS == 0:
+				self.mrowkaI += self.planszaS - 1;
+			else:
+				self.mrowkaI -= 1;
 
 		self.plansza[self.mrowkaI].mrowka = True;
 		self.kroki += 1;
@@ -65,5 +76,5 @@ class Gra:
 			self.wyswietlPlansze();
 			time.sleep(self.czasBezAktualizacji);
 
-gra: Gra = Gra(9, 9);
+gra: Gra = Gra(41, 41);
 gra.graj();
