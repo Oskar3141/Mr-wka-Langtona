@@ -1,2 +1,2 @@
-# Mr-wka-Langtona
+# Mrówka-Langtona
 Mrówka 🐜
