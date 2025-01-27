@@ -2,34 +2,35 @@ from enum import Enum
 import os
 import time
 
-class TypPola(Enum):
-	MARTWE = 0
-	ZYWE = 1
-	MROWKA = 2
+class Pole:
+	def __init__(self, zywe: bool, mrowka: bool):
+		self.zywe = zywe;
+		self.mrowka = mrowka;
 
 class Gra:
-	def __init__(self, x: int, y: int):
-		self.x: int = x;
-		self.y: int = y;
-		self.plansza: [[TypPola]] = [[TypPola.MARTWE for _ in range(0, x)] for _ in range(0, y)];
-		self.plansza[y // 2][x // 2] = TypPola.MROWKA;
+	def __init__(self, s: int, w: int):
+		self.planszaS: int = s;
+		self.planszaW: int = w;
+		
+		self.plansza: [[Pole]] = [[Pole(False, False) for _ in range(0, self.planszaS)] for _ in range(0, self.planszaW)];
+		self.plansza[self.planszaW // 2][self.planszaS // 2].mrowka = True;
 
 	def wyswietlPlansze(self):
 		os.system("cls" if os.name == "nt" else "clear");
 		for y in self.plansza:
 			for x in y:
 				znak: str = "";
-				if x == TypPola.MARTWE:
-					znak = "."
-				elif x == TypPola.ZYWE:
+				if x.mrowka:
+					znak = "@"
+				elif x.zywe:
 					znak = "o"
 				else:
-					znak = "@"
+					znak = "."
 
 				print(znak, " ", end="");
 			print("");
 
-	def zaktualizujPlane(self):
+	def zaktualizujPlansze(self):
 		# coś...
 		odwalsie = True;
 
