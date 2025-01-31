@@ -1,6 +1,7 @@
 import os
 import time
 import argparse
+from colored import Fore, Back, Style
 
 class Pole:
 	"""
@@ -113,11 +114,11 @@ class Gra:
 		for i in range(0, self.planszaS * self.planszaW):
 			znak: str = "";
 			if self.plansza[i].mrowka:
-				znak = self.mrowka;
+				znak = f"{Fore.rgb("100%", "100%", "0%")}{self.mrowka}{Style.reset}";
 			elif self.plansza[i].zywe:
-				znak = self.zywePole;
+				znak = f"{Fore.green}{self.zywePole}{Style.reset}";
 			else:
-				znak = self.martwePole;
+				znak = f"{Fore.red}{self.martwePole}{Style.reset}";
 
 			print(znak, " ", end="");
 			if i != 0 and (i+1) % self.planszaS == 0:
@@ -128,7 +129,7 @@ class Gra:
 		"""
 		Funkcja aktualizująca pozycję mrówki. Zwraca wartość logiczną 0 w przypadku osiągnięcia limitu kroków.
 		"""
-		if self.kroki >= self.limitKrokow:
+		if self.kroki >= self.limitKrokow and self.limitKrokow > 0:
 			return False;
 
 		if self.plansza[self.mrowkaI].zywe:
