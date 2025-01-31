@@ -4,7 +4,7 @@ Symulacja mrówki Langtona w Pythonie.<br><br>
 Najprostrze użycie: <code>python main.py {szerokość} {wysokość} {prędkość} {limit}</code>, gdzie <code>szerokość</code> <code>wysokość</code> <code>prędkość</code> <code>limit</code> są wymaganymi argumentami pozycyjnymi określającymi odpowiednio szerokość planszy, wysokość planszy, prędkość symulacji, limit kroków symulacji.<br><br>
 
 Możliwość wywołania komendy <code>python main.py --help</code> po dokładnieszy opis owych parametrów oraz informacje o parametrach opcjonalnych.<br>
-# Instalacja
+# Instalancja oraz obsługa projektu
 1. Klonujemy repozytorium do wybranego folderu, ręcznie albo za pomocą komendy <code>git clone https://github.com/Oskar3141/Mrowka-Langtona</code>.<br>
 2. Otwieramy folder z projektem <code>cd Mrowka-Langtona</code>.<br>
 3. Tworzymy nowe środowisko wirtualne <code>python3 -m venv .venv</code>.<br>
